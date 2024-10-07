@@ -1,4 +1,4 @@
 homeassistant==2024.7.2
 pip>=21.0,<24.3
 botocore @ git+https://github.com/boto/botocore
-ruff==0.6.2
+ruff==0.6.9
