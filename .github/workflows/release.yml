@@ -24,6 +24,6 @@ jobs:
           zip aws_cost.zip -r ./
 
       - name: "Upload the ZIP file to the release"
-        uses: "softprops/action-gh-release@v2.0.8"
+        uses: "softprops/action-gh-release@v2.0.9"
         with:
           files: ${{ github.workspace }}/custom_components/aws_cost/aws_cost.zip
