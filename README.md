@@ -1,9 +1,10 @@
 # 💰 AWS Cost for Home Assistant 
 
-The ha-aws-cost custom component interacts with AWS to get the month to date cost and forecast cost and make it available on Home Assistant. It adds two new entities:
+The ha-aws-cost custom component interacts with AWS to get the month to date cost and forecast cost and make it available on Home Assistant. It adds three new entities:
 
 * **Month to date cost:** The current cost of your AWS account 
 * **Forecasted month costs:** The forecasted cost based in your current consumption 
+* **Last month costs:** The cost of the last closed month
 
 It was created to give you easy access to the current cost of your AWS account.
 
