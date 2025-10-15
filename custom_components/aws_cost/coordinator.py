@@ -58,9 +58,16 @@ class AWSCostDataUpdateCoordinator(DataUpdateCoordinator):
 
             _LOGGER.debug("Forecast: %s", forecast)
 
+            last_month = await self.hass.async_add_executor_job(
+                self.client.get_last_month_cost
+            )
+
+            _LOGGER.debug("Last month cost: %s", last_month[0])
+
             return {
                 "month_to_date": month_to_date[0],
                 "forecast": forecast[0],
+                "last_month": last_month[0],
                 "currency": month_to_date[1],
             }
         except Exception as err:

@@ -49,6 +49,12 @@ SENSORS: tuple[AWSCostSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.MONETARY,
         state=lambda data: round(float(data["forecast"]), 2),
     ),
+    AWSCostSensorEntityDescription(
+        key="last_month_cost",
+        name="Last Month Cost",
+        device_class=SensorDeviceClass.MONETARY,
+        state=lambda data: round(float(data["last_month"]), 2),
+    ),
 )
 
 

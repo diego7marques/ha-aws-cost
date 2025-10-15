@@ -92,3 +92,34 @@ class AWSCostExplorer:
             return amount, currency
         except Exception as e:
             _LOGGER.error("Error occurred while fetching forecast cost data: %s", e)
+
+    def get_last_month_cost(self):
+        """Gets the cost for the previous month"""
+        try:
+            # Calculate the first day of last month
+            today = date.today()
+            first_day_current_month = today.replace(day=1)
+            last_day_last_month = first_day_current_month - timedelta(days=1)
+            first_day_last_month = last_day_last_month.replace(day=1)
+            
+            start = str(first_day_last_month)
+            end = str(first_day_current_month)
+
+            _LOGGER.debug("######### Last Month Start: %s", start)
+            _LOGGER.debug("######### Last Month End: %s", end)
+
+            response = self.client.get_cost_and_usage(
+                TimePeriod={"Start": start, "End": end},
+                Granularity="MONTHLY",
+                Metrics=["BlendedCost"],
+            )
+
+            _LOGGER.debug("Received response from AWS Cost Explorer for last month: %s", response)
+
+            amount = response["ResultsByTime"][0]["Total"]["BlendedCost"]["Amount"]
+            currency = response["ResultsByTime"][0]["Total"]["BlendedCost"]["Unit"]
+
+            return amount, currency
+
+        except Exception as e:
+            _LOGGER.error("Error occurred while fetching last month cost data: %s", e)
