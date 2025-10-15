@@ -101,7 +101,7 @@ class AWSCostExplorer:
             first_day_current_month = today.replace(day=1)
             last_day_last_month = first_day_current_month - timedelta(days=1)
             first_day_last_month = last_day_last_month.replace(day=1)
-            
+
             start = str(first_day_last_month)
             end = str(first_day_current_month)
 
@@ -114,7 +114,9 @@ class AWSCostExplorer:
                 Metrics=["BlendedCost"],
             )
 
-            _LOGGER.debug("Received response from AWS Cost Explorer for last month: %s", response)
+            _LOGGER.debug(
+                "Received response from AWS Cost Explorer for last month: %s", response
+            )
 
             amount = response["ResultsByTime"][0]["Total"]["BlendedCost"]["Amount"]
             currency = response["ResultsByTime"][0]["Total"]["BlendedCost"]["Unit"]
