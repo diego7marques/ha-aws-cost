@@ -166,5 +166,5 @@ cython_debug/
 
 # Local test
 test/
-to-do.txt
+internal-notes.txt
 config/

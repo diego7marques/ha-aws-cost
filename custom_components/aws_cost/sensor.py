@@ -54,7 +54,9 @@ SENSORS: tuple[AWSCostSensorEntityDescription, ...] = (
 
 async def async_setup_entry(hass, config_entry, async_add_entities) -> None:
     """Set up AWS Cost sensors based on a config entry."""
-    coordinator = AWSCostDataUpdateCoordinator(hass, config_entry)
+    # Get coordinator from hass.data (created in __init__.py)
+    coordinator = hass.data[DOMAIN][config_entry.entry_id]
+
     try:
         await coordinator.async_config_entry_first_refresh()
     except Exception as err:
